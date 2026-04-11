@@ -1,0 +1,30 @@
+{
+  "dataset_id": "h1ds_usdjpy_h1_20251001_20260307_0600_seq32_legacycompat_baseline_v1",
+  "schema_version": 1,
+  "dataset_role": "baseline_refactor_reference",
+  "symbol": "USDJPY",
+  "timeframe": "H1",
+  "sequence_length": 32,
+  "explicit_target_hours": [
+    2
+  ],
+  "derived_training_target_hours": [
+    6,
+    7,
+    8
+  ],
+  "start_jst": "2025-10-01 00:00:00",
+  "end_jst": "2026-03-07 06:00:00",
+  "row_count_saved": 2623,
+  "row_count_after_multihorizon_inference": 2423,
+  "frozen_from_path": "Src/Backtest/Output/datasets/h1_training_dataset.csv",
+  "frozen_to_path": "Src/Backtest/Output/datasets/h1/h1ds_usdjpy_h1_20251001_20260307_0600_seq32_legacycompat_baseline_v1.csv",
+  "builder_script": "Src/Backtest/Scripts/build_h1_training_dataset.py",
+  "source_type": "legacy_materialized_csv_copy",
+  "baseline_frozen_at_jst": "2026-04-09 01:04:51",
+  "notes": [
+    "This artifact was frozen from the legacy h1_training_dataset.csv file for refactor reproducibility.",
+    "The saved CSV does not explicitly contain t+6/t+7/t+8 target columns.",
+    "The current trainer infers t+6/t+7/t+8 targets from timestamp_jst and future entry_price values."
+  ]
+}

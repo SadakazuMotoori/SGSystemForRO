@@ -1,0 +1,17 @@
+{
+  "role": "H1_TACTICAL_BIAS",
+  "active_model_id": "h1model_tactical_usdjpy_h1_seq32_tg6-7-8_baseline_v1_20260408T232845JST",
+  "model_path": "Asset/Models/h1/h1model_tactical_usdjpy_h1_seq32_tg6-7-8_baseline_v1_20260408T232845JST.pt",
+  "metadata_path": "Asset/Models/h1/h1model_tactical_usdjpy_h1_seq32_tg6-7-8_baseline_v1_20260408T232845JST.metadata.json",
+  "summary_path": "Asset/Models/h1/h1model_tactical_usdjpy_h1_seq32_tg6-7-8_baseline_v1_20260408T232845JST.summary.json",
+  "predictions_path": "Asset/Models/h1/h1model_tactical_usdjpy_h1_seq32_tg6-7-8_baseline_v1_20260408T232845JST.predictions.csv",
+  "dataset_id": "h1ds_usdjpy_h1_20251001_20260307_0600_seq32_legacycompat_baseline_v1",
+  "dataset_path": "Src/Backtest/Output/datasets/h1/h1ds_usdjpy_h1_20251001_20260307_0600_seq32_legacycompat_baseline_v1.csv",
+  "promotion_stage": "active",
+  "approved_by": "manual_baseline_freeze",
+  "promoted_at_jst": "2026-04-09 01:04:51",
+  "notes": [
+    "Established during Phase A baseline freeze.",
+    "Uses the legacy-compatible baseline dataset and the current patch-mixer runtime artifact."
+  ]
+}

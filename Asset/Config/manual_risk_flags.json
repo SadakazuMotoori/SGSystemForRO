@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "updated_jst": "",
+  "notes": "",
+  "flags": {
+    "high_impact_event_soon": false,
+    "central_bank_speech": false,
+    "geopolitical_alert": false,
+    "data_feed_error": false,
+    "abnormal_volatility": false
+  }
+}

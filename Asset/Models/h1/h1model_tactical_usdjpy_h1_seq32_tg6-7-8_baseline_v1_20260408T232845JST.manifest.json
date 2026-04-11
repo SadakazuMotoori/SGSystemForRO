@@ -1,0 +1,30 @@
+{
+  "model_id": "h1model_tactical_usdjpy_h1_seq32_tg6-7-8_baseline_v1_20260408T232845JST",
+  "role": "H1_TACTICAL_BIAS",
+  "promotion_stage": "active",
+  "dataset_id": "h1ds_usdjpy_h1_20251001_20260307_0600_seq32_legacycompat_baseline_v1",
+  "dataset_path": "Src/Backtest/Output/datasets/h1/h1ds_usdjpy_h1_20251001_20260307_0600_seq32_legacycompat_baseline_v1.csv",
+  "model_family": "h1_multi_horizon_patch_mixer",
+  "horizons": [
+    6,
+    7,
+    8
+  ],
+  "sequence_length": 32,
+  "model_path": "Asset/Models/h1/h1model_tactical_usdjpy_h1_seq32_tg6-7-8_baseline_v1_20260408T232845JST.pt",
+  "metadata_path": "Asset/Models/h1/h1model_tactical_usdjpy_h1_seq32_tg6-7-8_baseline_v1_20260408T232845JST.metadata.json",
+  "summary_path": "Asset/Models/h1/h1model_tactical_usdjpy_h1_seq32_tg6-7-8_baseline_v1_20260408T232845JST.summary.json",
+  "predictions_path": "Asset/Models/h1/h1model_tactical_usdjpy_h1_seq32_tg6-7-8_baseline_v1_20260408T232845JST.predictions.csv",
+  "legacy_source_paths": {
+    "model_path": "Asset/Models/h1_multi_horizon_patch_mixer.pt",
+    "metadata_path": "Asset/Models/h1_multi_horizon_patch_mixer_metadata.json",
+    "summary_path": "Asset/Models/h1_multi_horizon_patch_mixer_summary.json",
+    "predictions_path": "Asset/Models/h1_multi_horizon_patch_mixer_test_predictions.csv"
+  },
+  "baseline_promoted_at_jst": "2026-04-09 01:04:51",
+  "approved_by": "manual_baseline_freeze",
+  "notes": [
+    "This artifact is a versioned freeze of the current runtime H1 tactical-bias model.",
+    "It remains tied to the current legacy-compatible baseline dataset for refactor safety."
+  ]
+}
