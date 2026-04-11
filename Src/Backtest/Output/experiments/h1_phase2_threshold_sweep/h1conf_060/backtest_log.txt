@@ -1,0 +1,118 @@
+========== Backtest Start ==========
+[INFO] cwd=C:\Users\motoo\OneDrive\�f�X�N�g�b�v\�܂Ƃ�\�l�Ɩ�\�V�X�e���J��\FX\SGSystemForRO
+[INFO] history_source=HISTORY_CACHE_PREFERRED dir=C:\Users\motoo\OneDrive\�f�X�N�g�b�v\�܂Ƃ�\�l�Ɩ�\�V�X�e���J��\FX\SGSystemForRO\Src\Backtest\Output\history_cache\h1_phase2_usdjpy_20251001_20260307
+[INFO] symbol=USDJPY
+[INFO] start=2025-10-01 00:00:00
+[INFO] end=2026-03-07 23:59:59
+[INFO] history_source=HISTORY_CACHE_PREFERRED
+[INFO] target_count=10692
+[INFO] progress=100/10692 records=100 skips=0
+[INFO] progress=200/10692 records=200 skips=0
+[INFO] progress=300/10692 records=300 skips=0
+[INFO] progress=400/10692 records=392 skips=8
+[INFO] progress=500/10692 records=492 skips=8
+[INFO] progress=600/10692 records=592 skips=8
+[INFO] progress=700/10692 records=692 skips=8
+[INFO] progress=900/10692 records=884 skips=16
+[INFO] progress=1000/10692 records=984 skips=16
+[INFO] progress=1100/10692 records=1084 skips=16
+[INFO] progress=1200/10692 records=1184 skips=16
+[INFO] progress=1300/10692 records=1276 skips=24
+[INFO] progress=1400/10692 records=1376 skips=24
+[INFO] progress=1500/10692 records=1476 skips=24
+[INFO] progress=1600/10692 records=1576 skips=24
+[INFO] progress=1700/10692 records=1676 skips=24
+[INFO] progress=1800/10692 records=1768 skips=32
+[INFO] progress=1900/10692 records=1868 skips=32
+[INFO] progress=2000/10692 records=1968 skips=32
+[INFO] progress=2100/10692 records=2068 skips=32
+[INFO] progress=2200/10692 records=2168 skips=32
+[INFO] progress=2300/10692 records=2260 skips=40
+[INFO] progress=2400/10692 records=2360 skips=40
+[INFO] progress=2500/10692 records=2460 skips=40
+[INFO] progress=2600/10692 records=2560 skips=40
+[INFO] progress=2700/10692 records=2660 skips=40
+[INFO] progress=2800/10692 records=2752 skips=48
+[INFO] progress=2900/10692 records=2852 skips=48
+[INFO] progress=3000/10692 records=2952 skips=48
+[INFO] progress=3100/10692 records=3052 skips=48
+[INFO] progress=3300/10692 records=3244 skips=56
+[INFO] progress=3400/10692 records=3344 skips=56
+[INFO] progress=3500/10692 records=3444 skips=56
+[INFO] progress=3600/10692 records=3544 skips=56
+[INFO] progress=3700/10692 records=3636 skips=64
+[INFO] progress=3800/10692 records=3736 skips=64
+[INFO] progress=3900/10692 records=3836 skips=64
+[INFO] progress=4000/10692 records=3936 skips=64
+[INFO] progress=4100/10692 records=4036 skips=64
+[INFO] progress=4200/10692 records=4128 skips=72
+[INFO] progress=4300/10692 records=4228 skips=72
+[INFO] progress=4400/10692 records=4328 skips=72
+[INFO] progress=4500/10692 records=4428 skips=72
+[INFO] progress=4600/10692 records=4528 skips=72
+[INFO] progress=4700/10692 records=4620 skips=80
+[INFO] progress=4800/10692 records=4720 skips=80
+[INFO] progress=4900/10692 records=4820 skips=80
+[INFO] progress=5000/10692 records=4920 skips=80
+[INFO] progress=5100/10692 records=5020 skips=80
+[INFO] progress=5200/10692 records=5112 skips=88
+[INFO] progress=5300/10692 records=5212 skips=88
+[INFO] progress=5400/10692 records=5312 skips=88
+[INFO] progress=5500/10692 records=5412 skips=88
+[INFO] progress=5700/10692 records=5604 skips=96
+[INFO] progress=5800/10692 records=5704 skips=96
+[INFO] progress=5900/10692 records=5796 skips=104
+[INFO] progress=6000/10692 records=5888 skips=112
+[INFO] progress=6100/10692 records=5988 skips=112
+[INFO] progress=6200/10692 records=6088 skips=112
+[INFO] progress=6300/10692 records=6180 skips=120
+[INFO] progress=6400/10692 records=6272 skips=128
+[INFO] progress=6500/10692 records=6372 skips=128
+[INFO] progress=6600/10692 records=6472 skips=128
+[INFO] progress=6700/10692 records=6572 skips=128
+[INFO] progress=6800/10692 records=6672 skips=128
+[INFO] progress=6900/10692 records=6764 skips=136
+[INFO] progress=7000/10692 records=6864 skips=136
+[INFO] progress=7100/10692 records=6964 skips=136
+[INFO] progress=7200/10692 records=7064 skips=136
+[INFO] progress=7300/10692 records=7164 skips=136
+[INFO] progress=7400/10692 records=7256 skips=144
+[INFO] progress=7500/10692 records=7356 skips=144
+[INFO] progress=7600/10692 records=7456 skips=144
+[INFO] progress=7700/10692 records=7556 skips=144
+[INFO] progress=7800/10692 records=7656 skips=144
+[INFO] progress=7900/10692 records=7748 skips=152
+[INFO] progress=8000/10692 records=7848 skips=152
+[INFO] progress=8100/10692 records=7948 skips=152
+[INFO] progress=8200/10692 records=8048 skips=152
+[INFO] progress=8300/10692 records=8140 skips=160
+[INFO] progress=8400/10692 records=8240 skips=160
+[INFO] progress=8500/10692 records=8340 skips=160
+[INFO] progress=8600/10692 records=8440 skips=160
+[INFO] progress=8700/10692 records=8540 skips=160
+[INFO] progress=8800/10692 records=8632 skips=168
+[INFO] progress=8900/10692 records=8732 skips=168
+[INFO] progress=9000/10692 records=8832 skips=168
+[INFO] progress=9100/10692 records=8932 skips=168
+[INFO] progress=9200/10692 records=9032 skips=168
+[INFO] progress=9300/10692 records=9124 skips=176
+[INFO] progress=9400/10692 records=9224 skips=176
+[INFO] progress=9500/10692 records=9324 skips=176
+[INFO] progress=9600/10692 records=9424 skips=176
+[INFO] progress=9700/10692 records=9524 skips=176
+[INFO] progress=9800/10692 records=9616 skips=184
+[INFO] progress=9900/10692 records=9716 skips=184
+[INFO] progress=10000/10692 records=9816 skips=184
+[INFO] progress=10100/10692 records=9916 skips=184
+[INFO] progress=10200/10692 records=10016 skips=184
+[INFO] progress=10300/10692 records=10108 skips=192
+[INFO] progress=10400/10692 records=10208 skips=192
+[INFO] progress=10500/10692 records=10308 skips=192
+[INFO] progress=10600/10692 records=10408 skips=192
+[INFO] output_dir=C:\Users\motoo\OneDrive\�f�X�N�g�b�v\�܂Ƃ�\�l�Ɩ�\�V�X�e���J��\FX\SGSystemForRO\Src\Backtest\Output\experiments\h1_phase2_threshold_sweep\h1conf_060
+[INFO] output_file=C:\Users\motoo\OneDrive\�f�X�N�g�b�v\�܂Ƃ�\�l�Ɩ�\�V�X�e���J��\FX\SGSystemForRO\Src\Backtest\Output\experiments\h1_phase2_threshold_sweep\h1conf_060\raw_signals.csv
+[INFO] saved=Src\Backtest\Output\experiments\h1_phase2_threshold_sweep\h1conf_060\raw_signals.csv
+[INFO] record_count=10492
+[INFO] skip_count=200
+[INFO] error_count=0
+========== Backtest End ==========

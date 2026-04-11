@@ -1,0 +1,120 @@
+[INFO] input_csv=C:\Users\motoo\OneDrive\デスクトップ\まとめ\個人業務\システム開発\FX\SGSystemForRO\Src\Backtest\Output\experiments\h1_phase2_threshold_sweep\h1conf_050\raw_signals.csv
+[INFO] rows=10492
+========== Evaluate Backtest Signals ==========
+total_records: 10492
+signal_count: 7
+evaluated_signal_count: 7
+correct_count: 7
+no_signal_count: 10485
+no_signal_ratio: 0.9993
+enter_hit_rate: 1.0000
+----- final_action_counts -----
+NO_TRADE: 5349
+WAIT: 2973
+SKIP: 1247
+EXIT: 916
+ENTER_LONG: 4
+ENTER_SHORT: 3
+----- base_final_action_counts -----
+NO_TRADE: 5349
+WAIT: 2506
+SKIP: 1247
+EXIT: 916
+ENTER_LONG: 346
+ENTER_SHORT: 128
+----- external_filter_status_counts -----
+OFF: 10081
+ON: 411
+----- env_direction_counts -----
+NO_TRADE: 5349
+LONG_ONLY: 3105
+SHORT_ONLY: 2038
+----- predicted_direction_counts -----
+NO_SIGNAL: 10485
+UP: 4
+DOWN: 3
+----- main_flow_gate_summary -----
+gate_changed_count: 467
+gate_changed_ratio: 0.04451010293556996
+base_signal_count: 474
+final_signal_count: 7
+blocked_signal_count: 467
+retained_signal_count: 7
+base_evaluated_signal_count: 472
+base_correct_count: 269
+base_enter_hit_rate: 0.5699152542372882
+final_evaluated_signal_count: 7
+final_correct_count: 7
+final_enter_hit_rate: 1.0
+hit_rate_delta: 0.43008474576271183
+path_signal_ready_count: 19
+path_signal_ready_ratio: 0.0018109035455585209
+path_gap_threshold_passed_count: 62
+path_gap_threshold_passed_ratio: 0.005909264201296225
+path_signal_side_counts: {'NONE': 5349, 'LONG': 3105, 'SHORT': 2038}
+----- top_final_reason_codes -----
+FINAL_DECISION_EXTERNAL_FILTER_OFF: 10081
+FINAL_DECISION_H2_NO_TRADE: 4938
+FINAL_DECISION_H1_ALIGNMENT_CONFIDENCE_OK: 3425
+FINAL_DECISION_H2_LONG_ONLY: 3105
+FINAL_DECISION_H1_ALIGNMENT_MISMATCH: 2189
+FINAL_DECISION_H2_SHORT_ONLY: 2038
+FINAL_DECISION_M15_SKIP: 1247
+FINAL_DECISION_H1_ALIGNMENT_ALIGNED_LONG: 940
+FINAL_DECISION_M15_EXIT: 916
+FINAL_DECISION_H1_ALIGNMENT_NEUTRAL: 802
+----- top_external_reason_codes -----
+EXTERNAL_FILTER_SPREAD_TOO_WIDE: 411
+----- top_h2_reason_codes -----
+H2_ENVIRONMENT_ADX_STRONG: 9572
+H2_ENVIRONMENT_MA_BULLISH: 5669
+H2_ENVIRONMENT_MA_SLOPE_UP: 5605
+H2_ENVIRONMENT_MA_SLOPE_DOWN: 4476
+H2_ENVIRONMENT_MA_BEARISH: 4412
+H2_ENVIRONMENT_STRUCTURE_HIGHER_HIGH: 4041
+H2_ENVIRONMENT_STRUCTURE_LOWER_LOW: 3117
+H2_ENVIRONMENT_ADX_WEAK: 509
+H2_ENVIRONMENT_EXTERNAL_FILTER_ON: 411
+----- top_h1_reason_codes -----
+H1_FORECAST_CONFIDENCE_OK: 8756
+H1_FORECAST_MODEL_LONG_BIAS: 5936
+H1_FORECAST_MODEL_SHORT_BIAS: 4556
+H1_FORECAST_CONFIDENCE_LOW: 1736
+----- top_m15_path_reason_codes -----
+MAIN_M15_PATH_SIGNAL_GAP_THRESHOLD_LOW: 10430
+MAIN_M15_PATH_SIGNAL_DIRECTION_NOT_ALIGNED: 8995
+MAIN_M15_PATH_SIGNAL_H2_NO_TRADE: 5349
+MAIN_M15_PATH_SIGNAL_H2_LONG_ONLY: 3105
+MAIN_M15_PATH_SIGNAL_H2_SHORT_ONLY: 2038
+MAIN_M15_PATH_SIGNAL_DIRECTION_ALIGNED: 1497
+MAIN_M15_PATH_SIGNAL_GAP_THRESHOLD_OK: 62
+----- top_m15_reason_codes -----
+M15_ENTRY_SPREAD_ACCEPTABLE: 5143
+M15_ENTRY_H2_NO_TRADE: 4938
+M15_ENTRY_PULLBACK_MISALIGNED: 3501
+M15_ENTRY_H1_BIAS_CONFLICT: 2675
+M15_ENTRY_BREAKOUT_NONE: 2645
+M15_ENTRY_NOISE_HIGH: 2490
+M15_ENTRY_MOMENTUM_MISALIGNED: 2252
+M15_ENTRY_MOMENTUM_ALIGNED_STRONG: 2028
+M15_ENTRY_PULLBACK_ALIGNED: 1641
+M15_ENTRY_NOISE_ACCEPTABLE: 1571
+----- direction_side_summary -----
+ENTER_LONG: count=4, correct_count=4, hit_rate=1.0000
+ENTER_SHORT: count=3, correct_count=3, hit_rate=1.0000
+----- decision_score_band_summary -----
+60_69: count=2, correct_count=2, hit_rate=1.0000
+70_79: count=4, correct_count=4, hit_rate=1.0000
+80_89: count=1, correct_count=1, hit_rate=1.0000
+----- entry_score_band_summary -----
+60_69: count=4, correct_count=4, hit_rate=1.0000
+70_79: count=2, correct_count=2, hit_rate=1.0000
+80_89: count=1, correct_count=1, hit_rate=1.0000
+----- decision_score_threshold_summary -----
+decision_score>=60: count=7, correct_count=7, hit_rate=1.0000, long_count=4, long_hit_rate=1.0000, short_count=3, short_hit_rate=1.0000
+decision_score>=70: count=5, correct_count=5, hit_rate=1.0000, long_count=3, long_hit_rate=1.0000, short_count=2, short_hit_rate=1.0000
+decision_score>=80: count=1, correct_count=1, hit_rate=1.0000, long_count=0, long_hit_rate=0.0000, short_count=1, short_hit_rate=1.0000
+----- candidate_strategy_summary -----
+decision_score>=70: count=5, correct_count=5, hit_rate=1.0000
+decision_score>=70_AND_ENTER_LONG: count=3, correct_count=3, hit_rate=1.0000
+decision_score>=70_AND_ENTER_SHORT: count=2, correct_count=2, hit_rate=1.0000

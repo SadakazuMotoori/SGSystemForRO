@@ -1,0 +1,35 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Prepare H1 Phase2 History Cache (MT5)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/Src/Backtest/Scripts/build_h1_phase2_history_cache.py",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--history-cache-dir",
+        "${workspaceFolder}/Src/Backtest/Output/history_cache/h1_phase2_usdjpy_20251001_20260307",
+        "--force-refresh"
+      ]
+    },
+    {
+      "name": "H1 Phase2 Threshold Sweep (History Cache)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/Src/Backtest/Scripts/run_h1_phase2_threshold_sweep.py",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "justMyCode": true,
+      "args": [
+        "--history-cache-dir",
+        "${workspaceFolder}/Src/Backtest/Output/history_cache/h1_phase2_usdjpy_20251001_20260307",
+        "--prefer-history-cache",
+        "--resume",
+        "--stop-on-error"
+      ]
+    }
+  ]
+}

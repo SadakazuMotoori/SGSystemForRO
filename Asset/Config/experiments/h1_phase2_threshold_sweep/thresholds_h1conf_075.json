@@ -1,0 +1,17 @@
+{
+  "spread_max": 0.02,
+  "adx_min": 15.0,
+  "trend_strength_min": 0.55,
+  "m15_entry_score_min": 60,
+  "m15_noise_max": 0.55,
+  "h1_confidence_min": 0.75,
+  "high_impact_event_lookahead_minutes": 60,
+  "high_impact_event_cooldown_minutes": 30,
+  "central_bank_speech_lookahead_minutes": 180,
+  "central_bank_speech_cooldown_minutes": 60,
+  "data_stale_minutes_m15": 30,
+  "data_stale_minutes_h1": 90,
+  "data_stale_minutes_h2": 180,
+  "abnormal_volatility_range_ratio_max": 2.5,
+  "abnormal_volatility_noise_ratio_max": 1.5
+}

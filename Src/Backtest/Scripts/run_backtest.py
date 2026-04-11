@@ -1,9 +1,11 @@
 ﻿import argparse
 import json
+import struct
 from datetime import timedelta
 from pathlib import Path
 
 import MetaTrader5 as mt5
+import numpy as np
 import pandas as pd
 import os
 import sys
@@ -169,6 +171,183 @@ def convert_rates_to_dataframe(_rates, _include_spread, _symbol_point=0.0):
     return _df[_columns].copy()
 
 
+_MT5_HC_SECTION_BASE_OFFSET = 428
+
+
+def _build_mt5_hc_section_offset_map(_count):
+    _offsets = {}
+    _offset = _MT5_HC_SECTION_BASE_OFFSET
+
+    for _section_name in ["times", "open", "high", "low", "close", "tick_volume", "spread", "real_volume"]:
+        _offsets[_section_name] = _offset
+        _item_size = 4 if _section_name == "spread" else 8
+        _offset += 4 + (_count * _item_size)
+
+    return _offsets
+
+
+def _read_mt5_hc_section_count(_buffer, _offset):
+    if (_offset + 4) > len(_buffer):
+        raise RuntimeError(f"MT5 terminal cache section header is truncated at offset={_offset}.")
+
+    return int(struct.unpack_from("<I", _buffer, _offset)[0])
+
+
+def load_mt5_hc_dataframe(_hc_path, _include_spread, _symbol_point=0.0):
+    _hc_path = Path(_hc_path).resolve()
+    if not _hc_path.exists():
+        raise RuntimeError(f"MT5 terminal cache file was not found: {_hc_path}")
+
+    _buffer = _hc_path.read_bytes()
+    _count = _read_mt5_hc_section_count(_buffer, _MT5_HC_SECTION_BASE_OFFSET)
+    if _count <= 0:
+        raise RuntimeError(f"MT5 terminal cache row count is invalid: path={_hc_path}, count={_count}")
+
+    _offsets = _build_mt5_hc_section_offset_map(_count)
+
+    for _section_name, _section_offset in _offsets.items():
+        _section_count = _read_mt5_hc_section_count(_buffer, _section_offset)
+        if _section_count != _count:
+            raise RuntimeError(
+                "MT5 terminal cache section count mismatch: "
+                f"path={_hc_path}, section={_section_name}, expected={_count}, actual={_section_count}"
+            )
+
+    _time_array = np.frombuffer(
+        _buffer,
+        dtype="<i8",
+        count=_count,
+        offset=_offsets["times"] + 4,
+    ).copy()
+    _open_array = np.frombuffer(
+        _buffer,
+        dtype="<f8",
+        count=_count,
+        offset=_offsets["open"] + 4,
+    ).copy()
+    _high_array = np.frombuffer(
+        _buffer,
+        dtype="<f8",
+        count=_count,
+        offset=_offsets["high"] + 4,
+    ).copy()
+    _low_array = np.frombuffer(
+        _buffer,
+        dtype="<f8",
+        count=_count,
+        offset=_offsets["low"] + 4,
+    ).copy()
+    _close_array = np.frombuffer(
+        _buffer,
+        dtype="<f8",
+        count=_count,
+        offset=_offsets["close"] + 4,
+    ).copy()
+
+    _df = pd.DataFrame(
+        {
+            "timestamp": pd.to_datetime(_time_array, unit="s", utc=True).tz_convert(JST),
+            "time": _time_array.astype("int64"),
+            "open": _open_array.astype(float),
+            "high": _high_array.astype(float),
+            "low": _low_array.astype(float),
+            "close": _close_array.astype(float),
+        }
+    )
+
+    if _include_spread:
+        _spread_array = np.frombuffer(
+            _buffer,
+            dtype="<i4",
+            count=_count,
+            offset=_offsets["spread"] + 4,
+        ).copy()
+        _df["spread"] = _spread_array.astype(float) * float(_symbol_point)
+
+    _columns = ["timestamp", "time", "open", "high", "low", "close"]
+    if _include_spread:
+        _columns.append("spread")
+
+    return _df[_columns].sort_values("timestamp").drop_duplicates(subset=["timestamp"]).reset_index(drop=True)
+
+
+def build_mt5_terminal_history_cache_dir_candidates(_symbol):
+    _candidates = []
+
+    try:
+        _terminal_info = mt5.terminal_info()
+    except Exception:
+        _terminal_info = None
+
+    try:
+        _account_info = mt5.account_info()
+    except Exception:
+        _account_info = None
+
+    if _terminal_info is not None:
+        _data_path = str(getattr(_terminal_info, "data_path", "") or "").strip()
+        if _data_path != "":
+            _data_path = Path(_data_path)
+
+            _server_name = ""
+            if _account_info is not None:
+                _server_name = str(getattr(_account_info, "server", "") or "").strip()
+
+            if _server_name != "":
+                _candidates.append(_data_path / "bases" / _server_name / "history" / _symbol / "cache")
+
+            _candidates.append(_data_path / "bases" / "Default" / "History" / _symbol / "cache")
+
+    return _candidates
+
+
+def resolve_mt5_terminal_history_cache_dir(_symbol):
+    for _candidate_dir in build_mt5_terminal_history_cache_dir_candidates(_symbol):
+        if all((_candidate_dir / f"{_timeframe}.hc").exists() for _timeframe in _HISTORY_TIMEFRAMES):
+            return _candidate_dir.resolve()
+
+    return None
+
+
+def load_mt5_terminal_history_cache(_symbol, _start_jst, _end_jst):
+    _cache_dir = resolve_mt5_terminal_history_cache_dir(_symbol)
+    if _cache_dir is None:
+        raise RuntimeError(f"MT5 terminal history cache directory was not found: symbol={_symbol}")
+
+    _m15_fetch_start = _start_jst - timedelta(days=5)
+    _h1_fetch_start = _start_jst - timedelta(days=10)
+    _h2_fetch_start = _start_jst - timedelta(days=20)
+    _symbol_point = get_symbol_point(_symbol)
+
+    _history = {
+        "M15": load_mt5_hc_dataframe(_cache_dir / "M15.hc", _include_spread=True, _symbol_point=_symbol_point),
+        "H1": load_mt5_hc_dataframe(_cache_dir / "H1.hc", _include_spread=False, _symbol_point=_symbol_point),
+        "H2": load_mt5_hc_dataframe(_cache_dir / "H2.hc", _include_spread=False, _symbol_point=_symbol_point),
+    }
+
+    _range_map = {
+        "M15": (_m15_fetch_start, _end_jst),
+        "H1": (_h1_fetch_start, _end_jst),
+        "H2": (_h2_fetch_start, _end_jst),
+    }
+
+    for _timeframe, (_range_start, _range_end) in _range_map.items():
+        _filtered = _history[_timeframe][
+            (_history[_timeframe]["timestamp"] >= _range_start) &
+            (_history[_timeframe]["timestamp"] <= _range_end)
+        ].copy()
+
+        if len(_filtered) == 0:
+            raise RuntimeError(
+                "MT5 terminal history cache does not contain the required range: "
+                f"symbol={_symbol}, timeframe={_timeframe}, start={_range_start}, end={_range_end}, cache_dir={_cache_dir}"
+            )
+
+        _history[_timeframe] = _filtered.reset_index(drop=True)
+
+    return _history, _cache_dir
+
+
 # --------------------------------------------------
 # MT5縺九ｉ繝舌ャ繧ｯ繝・せ繝亥ｯｾ雎｡螻･豁ｴ繧偵∪縺ｨ繧√※蜿門ｾ励☆繧・
 # 蠖ｹ蜑ｲ:
@@ -185,15 +364,21 @@ def load_mt5_history(_symbol, _start_jst, _end_jst):
 
     _symbol_point = get_symbol_point(_symbol)
 
-    _m15_rates = fetch_mt5_rates_range(_symbol, mt5.TIMEFRAME_M15, _m15_fetch_start, _end_jst)
-    _h1_rates = fetch_mt5_rates_range(_symbol, mt5.TIMEFRAME_H1, _h1_fetch_start, _end_jst)
-    _h2_rates = fetch_mt5_rates_range(_symbol, mt5.TIMEFRAME_H2, _h2_fetch_start, _end_jst)
+    try:
+        _m15_rates = fetch_mt5_rates_range(_symbol, mt5.TIMEFRAME_M15, _m15_fetch_start, _end_jst)
+        _h1_rates = fetch_mt5_rates_range(_symbol, mt5.TIMEFRAME_H1, _h1_fetch_start, _end_jst)
+        _h2_rates = fetch_mt5_rates_range(_symbol, mt5.TIMEFRAME_H2, _h2_fetch_start, _end_jst)
 
-    return {
-        "M15": convert_rates_to_dataframe(_m15_rates, _include_spread=True, _symbol_point=_symbol_point),
-        "H1": convert_rates_to_dataframe(_h1_rates, _include_spread=False, _symbol_point=_symbol_point),
-        "H2": convert_rates_to_dataframe(_h2_rates, _include_spread=False, _symbol_point=_symbol_point),
-    }
+        return {
+            "M15": convert_rates_to_dataframe(_m15_rates, _include_spread=True, _symbol_point=_symbol_point),
+            "H1": convert_rates_to_dataframe(_h1_rates, _include_spread=False, _symbol_point=_symbol_point),
+            "H2": convert_rates_to_dataframe(_h2_rates, _include_spread=False, _symbol_point=_symbol_point),
+        }
+    except Exception as _mt5_api_error:
+        print(f"[WARN] MT5 API history fetch failed. Trying terminal cache fallback: {_mt5_api_error}")
+        _history, _terminal_cache_dir = load_mt5_terminal_history_cache(_symbol, _start_jst, _end_jst)
+        print(f"[INFO] terminal_history_cache_dir={_terminal_cache_dir}")
+        return _history
 
 
 _HISTORY_TIMEFRAMES = ("M15", "H1", "H2")
